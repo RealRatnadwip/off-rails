@@ -16,6 +16,7 @@ import {
   Activity,
   Sliders,
   FileSpreadsheet,
+  Sparkles,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -37,6 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     { id: 'assets', label: 'Permanent Way Assets', icon: <Database className="w-4 h-4" />, badge: null, hotkey: '8' },
     { id: 'analytics', label: 'Operations Analytics', icon: <BarChart3 className="w-4 h-4" />, badge: null, hotkey: '9' },
     { id: 'settings', label: 'System Configuration', icon: <Settings className="w-4 h-4" />, badge: null, hotkey: '0' },
+    { id: 'demo', label: 'Landing Tour (/demo)', icon: <Sparkles className="w-4 h-4 text-amber-500" />, badge: 'TOUR', badgeColor: 'bg-amber-500 text-slate-950 font-bold', hotkey: 'D' },
   ];
 
   return (

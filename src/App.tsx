@@ -15,6 +15,7 @@ import { AnalyticsView } from './components/analytics/AnalyticsView';
 import { SettingsView } from './components/settings/SettingsView';
 import { DemoControlsModal } from './components/modals/DemoControlsModal';
 import { PresentationMode } from './components/presentation/PresentationMode';
+import { DemoLandingPage } from './components/demo/DemoLandingPage';
 
 const MainApp: React.FC = () => {
   const { userRole, setUserRole, isPresentationMode } = useRailway();
@@ -23,6 +24,9 @@ const MainApp: React.FC = () => {
   const getInitialTab = () => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.replace(/^\//, '').toLowerCase();
+      if (path === 'demo' || path === 'demo/') {
+        return 'demo';
+      }
       if (['dashboard', 'planning', 'blocks', 'tasks', 'network', 'approvals', 'field', 'assets', 'analytics', 'settings'].includes(path)) {
         return path;
       }
@@ -48,7 +52,7 @@ const MainApp: React.FC = () => {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname.replace(/^\//, '').toLowerCase();
-      if (path && ['dashboard', 'planning', 'blocks', 'tasks', 'network', 'approvals', 'field', 'assets', 'analytics', 'settings'].includes(path)) {
+      if (path && ['demo', 'dashboard', 'planning', 'blocks', 'tasks', 'network', 'approvals', 'field', 'assets', 'analytics', 'settings'].includes(path)) {
         setCurrentTab(path);
       }
     };
@@ -67,7 +71,7 @@ const MainApp: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [userRole, currentTab]);
 
-  // Keyboard navigation shortcuts for high-efficiency operations: Alt+1 to Alt+0
+  // Keyboard navigation shortcuts for high-efficiency operations: Alt+1 to Alt+0, Alt+D for Demo Landing
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.altKey && !e.ctrlKey && !e.metaKey) {
@@ -82,6 +86,8 @@ const MainApp: React.FC = () => {
           '8': 'assets',
           '9': 'analytics',
           '0': 'settings',
+          'd': 'demo',
+          'D': 'demo',
         };
         if (keyMap[e.key]) {
           e.preventDefault();
@@ -92,6 +98,16 @@ const MainApp: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Standalone Single Page Demo Landing Page View
+  if (currentTab === 'demo') {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col font-sans">
+        {isPresentationMode && <PresentationMode />}
+        <DemoLandingPage onNavigateTab={handleSetTab} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F1F5F9] text-slate-800 flex flex-col font-sans">

@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-[#F1F5F9] text-slate-800 font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -16,16 +19,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #E2E8F0;
+  background: #0B1926;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94A3B8;
+  background: #1E3A5F;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748B;
+  background: #3B82F6;
 }
 
 /* Safe area for mobile */
@@ -37,3 +40,18 @@
 .gov-table th {
   letter-spacing: 0.04em;
 }
+
+/* Subtle, clean focus & transition states */
+@keyframes trainTrackSlide {
+  0% {
+    transform: translateX(-40px);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.train-glimmer {
+  animation: trainTrackSlide 10s infinite linear;
+}
+

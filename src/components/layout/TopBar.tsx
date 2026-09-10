@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Printer,
   HelpCircle,
+  Sparkles,
 } from 'lucide-react';
 
 interface TopBarProps {
@@ -185,6 +186,16 @@ export const TopBar: React.FC<TopBarProps> = ({ currentTab, setCurrentTab }) => 
               </div>
             )}
           </div>
+
+          {/* Landing Page / Demo Tour Trigger */}
+          <button
+            onClick={() => setCurrentTab('demo')}
+            className="flex items-center space-x-1 bg-[#072136] hover:bg-[#051829] text-amber-300 hover:text-white px-2.5 py-1.5 rounded text-xs border border-amber-500/50 shadow-sm transition-colors font-mono"
+            title="Open Product Showcase & Landing Page (/demo)"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden xl:inline font-bold">/DEMO TOUR</span>
+          </button>
 
           {/* Demo Control Trigger (Styled like an official Operations Deck button) */}
           <button
